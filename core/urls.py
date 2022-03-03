@@ -4,5 +4,5 @@ import core.views
 
 
 urlpatterns = [
-    path('hello/', core.views.hello)
+    path('', core.views.index)
 ]

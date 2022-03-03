@@ -1,6 +1,7 @@
 from django.shortcuts import render
-
+import core.models
 
 # Create your views here.
-def hello(request):
-    return render(request, 'core/hello.html', {'name': 'Vasya'})
+def index(request):
+    books = core.models.Book.objects.all()
+    return render(request, 'core/index.html', {'books': books})
