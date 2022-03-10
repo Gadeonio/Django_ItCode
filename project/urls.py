@@ -23,7 +23,7 @@ from project import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls'))
+    path('', include('core.urls', namespace='core'))
 ]
 if settings.DEBUG:
     urlpatterns += static('node_modules', document_root=os.path.join(settings.BASE_DIR, 'node_modules'))
