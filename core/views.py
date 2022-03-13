@@ -7,7 +7,7 @@ import core.models
 
 
 class TitleMixin:
-    title = None
+    title: str = None
 
     def get_title(self):
         return self.title
@@ -31,7 +31,9 @@ class IndexView(TitleMixin, TemplateView):
         return 'Главная страница'
 
 
-class Books(ListView):
+class Books(TitleMixin, ListView):
+    title = 'Книги'
+
     def get_queryset(self):
         name = self.request.GET.get('name')
         queryset = core.models.Book.objects.all()
@@ -39,27 +41,12 @@ class Books(ListView):
             queryset = queryset.filter(name__icontains=name)
         return queryset
 
-class BookDetail(DetailView):
-    queryset = core.models.Book.objects.all()
-    #model = core.models.Book
 
+class BookDetail(TitleMixin, DetailView):
+    queryset = core.models.Book.objects.all()
+
+    def get_title(self):
+        return str(self.get_object())
 
 # Create your views here.
-'''def index(request):
-    books = core.models.Book.objects.all()
-    return render(request, 'core/index.html', {'books': books})
 
-
-def book_list(request):
-    name = request.GET.get('name')
-    books = core.models.Book.objects.all()
-    if name:
-        books = books.filter(name__icontains=name)
-
-    return render(request, 'core/book_list.html', {'books': books})
-
-
-def book_detail(request, pk):
-    #book = core.models.Book.objects.get(pk=pk)
-    book = get_object_or_404(core.models.Book, pk=pk)
-    return render(request, 'core/book_detail.html', {'book': book})'''
