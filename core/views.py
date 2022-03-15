@@ -4,6 +4,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView, ListView, DetailView
 
 import core.models
+import core.forms
 
 
 class TitleMixin:
@@ -40,6 +41,11 @@ class Books(TitleMixin, ListView):
         if name:
             queryset = queryset.filter(name__icontains=name)
         return queryset
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['form'] = core.forms.BookSearch(self.request.GET or None)
+        return context
 
 
 class BookDetail(TitleMixin, DetailView):
