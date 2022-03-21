@@ -35,7 +35,7 @@ class BookSearchTestCase(TestCase):
         response = self.client.get(reverse('core:book_list'), data={'name' : 'Test Book 1'})
         self.assertEqual(1, response.context['object_list'].count())
         self.assertEqual(
-            'Test Book 1',
+            'Html Css',
             response.context['object_list'].first().name,
         )
 
