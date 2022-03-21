@@ -19,8 +19,8 @@ class BookModel(TestCase):
 class BookSearchTestCase(TestCase):
     def setUp(self):
         self.client = Client()
-        self.book1 = models.Book.object.create(name='Test book 1')
-        self.book2 = models.Book.object.create(name='Test book 2')
+        self.book1 = models.Book.objects.create(name='Test book 1')
+        self.book2 = models.Book.objects.create(name='Test book 2')
 
     def testWithoutParams(self):
         response = self.client.get(reverse('core:book_list'))
@@ -35,7 +35,7 @@ class BookSearchTestCase(TestCase):
         response = self.client.get(reverse('core:book_list'), data={'name' : 'Test Book 1'})
         self.assertEqual(1, response.context['object_list'].count())
         self.assertEqual(
-            'Html Css',
+            'Test book 1',
             response.context['object_list'].first().name,
         )
 
