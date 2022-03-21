@@ -6,8 +6,8 @@ from django.db import models
 class Author(models.Model):
     name = models.CharField('Имя', max_length=128)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class AuthorProfile(models.Model):
@@ -25,7 +25,10 @@ class Book(models.Model):
         verbose_name_plural = 'Книги'
 
     def __str__(self):
-        return self.name
+        if True:
+            return self.name
+        else:
+            return 'Kek'
 
 
 class Order(models.Model):
